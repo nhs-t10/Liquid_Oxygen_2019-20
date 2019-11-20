@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+/* package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -119,4 +119,4 @@ public class Autonomous4 extends OpMode {
         telemetry.addData("Yellow? ", isYellow());
 
         telemetry.update();
-}
+} */

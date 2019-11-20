@@ -1,13 +1,13 @@
-package org.firstinspires.ftc.teamcode;
+/*package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
-import org.firstinspires.ftc.teamcode.LO2Library;
 
 
-@Override
+
+
 public class Autonomous1 extends OpMode {
     DcMotor lf, lb, rf, rb;
     float [] omniValues = new float [4];
@@ -19,14 +19,14 @@ public class Autonomous1 extends OpMode {
         return inches/4;
     }
     public void drive(float x, float y, float h, float k){
-        lf.setPower(-lf);
-        lb.setPower(-lb);
-        rf.setPower(rf);
-        rb.setPower(rb);
+        lf.setPower(-x);
+        lb.setPower(-y);
+        rf.setPower(h);
+        rb.setPower(k);
     }
     public void forward (float rotations) {
         int position = lf.getCurrentPosition():
-        while lf.getCurrentPosition() < position - (rotations * 560) {
+        while (lf.getCurrentPosition() < position - (rotations * 560)) {
             lf.setPower(-1);
             lb.setPower(-1);
             rf.setPower(1);
@@ -39,7 +39,7 @@ public class Autonomous1 extends OpMode {
     }
     public void right (float rotations) {
         int position = lf.getCurrentPosition():
-        while lf.getCurrentPosition() < position - (rotations * 560) {
+        while (lf.getCurrentPosition() < position - (rotations * 560)) {
             lf.setPower(-1);
             lb.setPower(-1);
             rf.setPower(-1);
@@ -52,7 +52,7 @@ public class Autonomous1 extends OpMode {
     }
     public void left (float rotations) {
         int position = lf.getCurrentPosition():
-        while lf.getCurrentPosition() < position + (rotations * 560) {
+        while (lf.getCurrentPosition() < position + (rotations * 560)) {
             lf.setPower(1);
             lb.setPower(1);
             rf.setPower(1);
@@ -65,7 +65,7 @@ public class Autonomous1 extends OpMode {
     }
     public void back (float rotations) {
         int position = lf.getCurrentPosition():
-        while lf.getCurrentPosition() < position + (rotations * 560) {
+        while (lf.getCurrentPosition() < position + (rotations * 560)) {
             lf.setPower(1);
             lb.setPower(1);
             rf.setPower(-1);
@@ -130,3 +130,4 @@ public class Autonomous1 extends OpMode {
 
     }
 }
+*/
