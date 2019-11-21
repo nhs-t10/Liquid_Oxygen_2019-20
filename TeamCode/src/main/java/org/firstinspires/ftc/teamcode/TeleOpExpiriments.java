@@ -2,14 +2,12 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-@TeleOp(name = "TeleOp1")
-public class TeleOp1 extends Library {
-
-    public void init() {
-      hardwareInit();
+@TeleOp(name = "Test Please")
+public class TeleOpExpiriments extends Library {
+    public void init(){
+        hardwareInit();
     }
-    public void loop() {
-
+    public void loop(){
         float lY = gamepad1.left_stick_y;
         float lX = gamepad1.left_stick_y;
         float rX = gamepad1.right_stick_x;
@@ -33,17 +31,11 @@ public class TeleOp1 extends Library {
         lift();
         clawControl(gamepad1.a);
 
-
-
-
-        //TelemetREEEEEEEEEEEEEEEEEEEEEEEEE
+        telemetry.addData("LY: ", lY);
+        telemetry.addData("LY Input", gamepad1.left_stick_y);
         telemetry.addData("lf power: ", lf.getPower());
         telemetry.addData("lb power: ", lb.getPower());
         telemetry.addData("rf power: ", rf.getPower());
         telemetry.addData("rb power: ", rb.getPower());
-
-        telemetry.update();
-    }
-    public void stop(){
     }
 }
