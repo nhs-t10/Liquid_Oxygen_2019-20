@@ -31,17 +31,25 @@ public class TeleOpExpiriments extends Library {
         drive(omniValues[0], omniValues[1], omniValues[2], omniValues[3]);
         lift();/** This Keybinding is currently set to x and y */
         clawControl(gamepad1.a);
-        speedUp(gamepad1.right_bumper);
+        /*speedUp(gamepad1.right_bumper);
         speedDown(gamepad2.left_bumper);
         parkStickDown(gamepad1.dpad_down);
         parkStickUp(gamepad1.dpad_up);
+        parkStickStop(gamepad1.dpad_up, gamepad1.dpad_down);*/
         slowMo();
 
-        telemetry.addData("LY: ", lY);
-        telemetry.addData("LY Input", gamepad1.left_stick_y);
+
         telemetry.addData("lf power: ", lf.getPower());
         telemetry.addData("lb power: ", lb.getPower());
         telemetry.addData("rf power: ", rf.getPower());
         telemetry.addData("rb power: ", rb.getPower());
+        telemetry.addData("Speed",speed);
+
+        telemetry.update();
+    }
+
+    @Override
+    public void stop() {
+        super.stop();
     }
 }

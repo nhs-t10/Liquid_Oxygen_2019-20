@@ -32,7 +32,9 @@ public abstract class Library extends OpMode{
         if (gamepad1.y){
             ladder.setPower(-0.5);
         }
-        if (!gamepad1.x && !gamepad1.y);
+        if (!gamepad1.x && !gamepad1.y){
+            ladder.setPower(0);
+        }
     }/** Working*/
     public void hookUp(){
         hook.setPosition(1);
@@ -46,15 +48,9 @@ public abstract class Library extends OpMode{
     public void closeClaw(){
         claw.setPosition(0); //subject to change for ease of hardware
     }
-    public void parkStickDown(boolean button){
+   /** public void parkStickDown(boolean button){
         if (button){
             park.setPower(1/2);
-            try {
-                Thread.sleep(3500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            park.setPower(0);
         }
     }
     public void parkStickUp(boolean button){
@@ -68,6 +64,11 @@ public abstract class Library extends OpMode{
             park.setPower(0);
         }
     }
+    public void parkStickStop(boolean button, boolean butone){
+        if (!button && !butone){
+            park.setPower(0);
+        }
+    }*/
     public float inchConversion(float inches){
         return inches/4;
     }
@@ -94,9 +95,9 @@ public abstract class Library extends OpMode{
         hook.setPosition(1);
         claw.setPosition(0);
     }
-    public void speedUp(boolean button){
+   /** public void speedUp(boolean button){
         if (button){
-            speed = speed+(1/10);
+            speed = speed + 0.1f;
             speed = Range.clip(speed, 0, -1);
             try {
                 Thread.sleep(100);
@@ -107,7 +108,7 @@ public abstract class Library extends OpMode{
     }
     public void speedDown(boolean button){
         if (button){
-            speed = speed-(1/10);
+            speed = speed-0.1f;
             speed = Range.clip(speed, 0, -1);
             try {
                 Thread.sleep(100);
@@ -115,7 +116,7 @@ public abstract class Library extends OpMode{
                 e.printStackTrace();
             }
         }
-    }
+    }*/
     public void updateShortcuts(){
         lY = gamepad1.left_stick_y;
         lX = gamepad1.left_stick_x;
@@ -125,7 +126,7 @@ public abstract class Library extends OpMode{
     public void slowMo(){
         if (gamepad1.dpad_right||gamepad1.dpad_left){
             saveSpeed = speed;
-            speed = 1/100;
+            speed = 0.1f;
             try {
                 Thread.sleep(5000);
             } catch (InterruptedException e) {
