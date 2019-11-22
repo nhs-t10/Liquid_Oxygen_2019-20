@@ -2,19 +2,17 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-@TeleOp(name = "Test Please")
+@TeleOp(name = "Main Code")
 public class TeleOpExpiriments extends Library {
     public void init(){
         hardwareInit();
     }
     public void loop(){
-        float lY = gamepad1.left_stick_y;
-        float lX = gamepad1.left_stick_y;
-        float rX = gamepad1.right_stick_x;
+        updateShortcuts();
         omniValues [0] = lY + rX - lX;
         omniValues [1] = lY + rX + lX;
-        omniValues [2] = lY - rX - lX;
-        omniValues [3] = lY - rX + lX;
+        omniValues [2] = lY - rX + lX;
+        omniValues [3] = lY - rX - lX;
 
         float highest = 0;
         for (int i=0; i<4; i++) {
@@ -27,9 +25,17 @@ public class TeleOpExpiriments extends Library {
                 omniValues[i] = omniValues[i] / highest;
             }
         }
+        for (int i = 0; i<4;i++){
+            omniValues[i] = omniValues[i]*speed;
+        }
         drive(omniValues[0], omniValues[1], omniValues[2], omniValues[3]);
-        lift();
+        lift();/** This Keybinding is currently set to x and y */
         clawControl(gamepad1.a);
+        speedUp(gamepad1.right_bumper);
+        speedDown(gamepad2.left_bumper);
+        parkStickDown(gamepad1.dpad_down);
+        parkStickUp(gamepad1.dpad_up);
+        slowMo();
 
         telemetry.addData("LY: ", lY);
         telemetry.addData("LY Input", gamepad1.left_stick_y);
