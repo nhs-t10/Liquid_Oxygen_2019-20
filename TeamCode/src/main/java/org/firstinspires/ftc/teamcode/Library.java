@@ -11,18 +11,20 @@ import com.qualcomm.robotcore.hardware.VoltageSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.CRServo;
 public abstract class Library extends OpMode{
+    boolean clawOpen;
     float speed = 0.5f;
     float lY , lX, rX, saveSpeed;
-    public DcMotor lf, lb, rf, rb;
-    public Servo claw, hook;
-    public CRServo ladder, park;
+    public DcMotor lf, lb, rf, rb, ladder;
+    public Servo claw, hook, normPark;
+    public CRServo park;
     float [] omniValues = new float [4];
-
     public void clawControl(boolean button){
-        if (button) {
+        if (button && !clawOpen) {
             openClaw();
-        }else{
+            clawOpen = true;
+        }else if (button){
             closeClaw();
+            clawOpen = false;
         }
     }
     public void lift(){
@@ -36,12 +38,6 @@ public abstract class Library extends OpMode{
             ladder.setPower(0);
         }
     }/** Working*/
-    public void hookUp(){
-        hook.setPosition(1);
-    }
-    public void hookDown(){
-        hook.setPosition(0.5);
-    }
     public void openClaw(){
         claw.setPosition(0.5); //subject to change for ease of hardware
     }
@@ -74,10 +70,10 @@ public abstract class Library extends OpMode{
     }
 
     public void drive(float x, float y, float h, float k){
-        lf.setPower(-x);
-        lb.setPower(-y);
-        rf.setPower(h);
-        rb.setPower(k);
+        lf.setPower(-x*speed);
+        lb.setPower(-y*speed);
+        rf.setPower(h*speed);
+        rb.setPower(k*speed);
     }
 
     public void hardwareInit(){
@@ -87,8 +83,9 @@ public abstract class Library extends OpMode{
         rb = hardwareMap.dcMotor.get("rb");
         hook = hardwareMap.servo.get("Hook");
         claw = hardwareMap.servo.get("Claw");
-        ladder = hardwareMap.crservo.get("Ladder");
-        park = hardwareMap.crservo.get("Park");
+        ladder = hardwareMap.dcMotor.get("Ladder");
+        //park = hardwareMap.crservo.get("Park");
+        //normPark = hardwareMap.servo.get("ParkII");
 
         telemetry.addData("hook position", hook.getPosition());
         telemetry.addData("claw position", claw.getPosition());
@@ -118,22 +115,31 @@ public abstract class Library extends OpMode{
         }
     }*/
     public void updateShortcuts(){
-        lY = gamepad1.left_stick_y;
+        lY = -gamepad1.left_stick_y;
         lX = gamepad1.left_stick_x;
         rX = gamepad1.right_stick_x;
     }
 
-    public void slowMo(){
-        if (gamepad1.dpad_right||gamepad1.dpad_left){
-            saveSpeed = speed;
-            speed = 0.1f;
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            speed = saveSpeed;
+    public void hookOut (boolean button){
+        if (button){
+            hook.setPosition(0.6);
+        }
+    }
+    public void hookIn(boolean button){
+        if (button){
+            hook.setPosition(0.1);
+        }
+    }
+
+    public void parking(boolean park, boolean unpark){
+        if (park){
+            normPark.setPosition(1);
+        }
+        if (unpark){
+            normPark.setPosition(0);
         }
     }
 
 }
+
+
