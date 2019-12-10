@@ -8,6 +8,7 @@ public class Primary_TeleOp extends Library {
         hardwareInit();
     }
     public void loop(){
+        //Start of Omni Drive code
         updateShortcuts();
         omniValues [0] = lY + rX + lX;
         omniValues [1] = lY + rX - lX;
@@ -29,6 +30,7 @@ public class Primary_TeleOp extends Library {
             omniValues[i] = omniValues[i]*speed;
         }
         drive(omniValues[0], omniValues[1], omniValues[2], omniValues[3]);
+        //end of Omni Drive Code
        // lift();/** This Keybinding is currently set to x and y */
         clawControl(gamepad1.a);
         /*speedUp(gamepad1.right_bumper);
