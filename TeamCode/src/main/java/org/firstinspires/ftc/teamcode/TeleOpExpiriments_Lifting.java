@@ -2,8 +2,10 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-@TeleOp(name = "Main Code")
-public class Primary_TeleOp extends Library {
+@TeleOp(name = "Do You Even Lift Bro?")
+public class TeleOpExpiriments_Lifting extends Library {
+    double speedScale = 0.5;
+    double stallScale = 0;
     public void init(){
         hardwareInit();
     }
@@ -35,23 +37,23 @@ public class Primary_TeleOp extends Library {
 
 
        // lift();/** This Keybinding is currently set to x and y */
-        clawControl(gamepad1.a);
-        /*speedUp(gamepad1.right_bumper);
-        speedDown(gamepad2.left_bumper);
-        parkStickDown(gamepad1.dpad_down);
-        parkStickUp(gamepad1.dpad_up);
-        parkStickStop(gamepad1.dpad_up, gamepad1.dpad_down);*/
-        lift(gamepad1.x, gamepad1.y, 0);
-        hookIn(gamepad1.dpad_right);
-        hookOut(gamepad1.dpad_left);
-        if (gamepad1.left_bumper){
-            speed = 0.25f;
+        clawControl(gamepad1.dpad_right);
+        lift(gamepad1.dpad_up, gamepad1.dpad_down, stallScale);
+        if (gamepad1.a){
+            stallScale = stallScale+0.1f;
+            waitFor(200);
         }
-        if (gamepad1.right_bumper){
-            speed = 0.75f;
+        if (gamepad1.b){
+            stallScale = stallScale-0.1f;
+            waitFor(200);
         }
-        if (gamepad1.left_bumper && gamepad1.right_bumper){
-            speed = 0.5f;
+        if (gamepad1.x){
+            stallScale = stallScale+0.01f;
+            waitFor(200);
+        }
+        if (gamepad1.y){
+            stallScale = stallScale-0.01f;
+            waitFor(200);
         }
 
 

@@ -10,6 +10,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.VoltageSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.CRServo;
+import static java.lang.Thread.sleep;
 public abstract class Library extends OpMode{
     boolean clawOpen;
     float speed = 0.5f;
@@ -27,7 +28,7 @@ public abstract class Library extends OpMode{
             clawOpen = false;
         }
     }
-    public void lift(){
+    public void lift(boolean up, boolean down, double stall){
         if (gamepad1.x){
             ladder.setPower(0.5);
         }
@@ -35,7 +36,7 @@ public abstract class Library extends OpMode{
             ladder.setPower(-0.5);
         }
         if (!gamepad1.x && !gamepad1.y){
-            ladder.setPower(0);
+            ladder.setPower(stall);
         }
     }/** Working*/
     public void openClaw(){
@@ -89,7 +90,7 @@ public abstract class Library extends OpMode{
 
         telemetry.addData("hook position", hook.getPosition());
         telemetry.addData("claw position", claw.getPosition());
-        hook.setPosition(1);
+        hook.setPosition(0.1);
         claw.setPosition(0);
     }
    /** public void speedUp(boolean button){
@@ -130,7 +131,6 @@ public abstract class Library extends OpMode{
             hook.setPosition(0.1);
         }
     }
-
     public void parking(boolean park, boolean unpark){
         if (park){
             normPark.setPosition(1);
@@ -139,8 +139,12 @@ public abstract class Library extends OpMode{
             normPark.setPosition(0);
         }
     }
-    public void wait(double seconds){
-
+    public void waitFor(long miliseconds){
+        try {
+            sleep(miliseconds);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 }

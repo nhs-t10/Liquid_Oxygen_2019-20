@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.ColorSensor;
-@TeleOp(name = "Main Code")
+@TeleOp(name = "Color Sensor Test")
 public class TeleOpExpirimentsColorSensor extends Library {
     ColorSensor Glasses;
 

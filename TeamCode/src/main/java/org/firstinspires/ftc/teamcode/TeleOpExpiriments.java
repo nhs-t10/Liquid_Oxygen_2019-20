@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-@TeleOp(name = "TeleEx")
+@TeleOp(name = "Driving Speed Test")
 public class TeleOpExpiriments extends Library {
     public void init(){
         hardwareInit();
@@ -29,17 +29,23 @@ public class TeleOpExpiriments extends Library {
             omniValues[i] = omniValues[i]*speed;
         }
         drive(omniValues[0]*speed, omniValues[1]*speed, omniValues[2]*speed, omniValues[3]*speed);
+
+
         if (gamepad1.a){
             speed = speed+0.1f;
+            waitFor(200);
         }
         if (gamepad1.b){
             speed = speed-0.1f;
+            waitFor(200);
         }
         if (gamepad1.x){
             speed = speed+0.01f;
+            waitFor(200);
         }
         if (gamepad1.y){
             speed = speed-0.01f;
+            waitFor(200);
         }
         telemetry.addData("lf power: ", lf.getPower());
         telemetry.addData("lb power: ", lb.getPower());
