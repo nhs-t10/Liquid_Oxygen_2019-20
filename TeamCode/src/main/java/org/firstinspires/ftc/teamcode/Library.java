@@ -139,6 +139,9 @@ public abstract class Library extends OpMode{
             normPark.setPosition(0);
         }
     }
+    public void wait(double seconds){
+
+    }
 
 }
 
