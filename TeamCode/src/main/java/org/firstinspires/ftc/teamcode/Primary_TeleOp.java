@@ -45,13 +45,13 @@ public class Primary_TeleOp extends Library {
         hookIn(gamepad1.dpad_right);
         hookOut(gamepad1.dpad_left);
         if (gamepad1.left_bumper){
-            speed = 0.25f;
+            speed = 0.6f;
         }
         if (gamepad1.right_bumper){
             speed = 0.75f;
         }
         if (gamepad1.left_bumper && gamepad1.right_bumper){
-            speed = 0.5f;
+            speed = 0.65f;
         }
 
 

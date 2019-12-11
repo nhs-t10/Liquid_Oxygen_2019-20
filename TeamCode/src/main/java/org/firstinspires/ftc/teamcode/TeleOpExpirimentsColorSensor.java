@@ -8,7 +8,7 @@ public class TeleOpExpirimentsColorSensor extends Library {
 
     public void init(){
         hardwareInit();
-        Glasses = hardwareMap.colorSensor.get("colorSensor1");
+        Glasses = hardwareMap.colorSensor.get("Glasses");
     }
     public void loop(){
         telemetry.addData("red",Glasses.red());
