@@ -1,15 +1,9 @@
-/*package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.util.Range;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
-
-
-@autonomous("name = Autonomous1New")
-public class Autonomous1 extends OpMode {
-    DcMotor lf, lb, rf, rb;
+@Autonomous
+public class Autonomous1New extends Library {
     float [] omniValues = new float [4];
     int step = 1;
     public boolean isYellow(){
@@ -25,7 +19,7 @@ public class Autonomous1 extends OpMode {
         rb.setPower(k);
     }
     public void forward (float rotations) {
-        int position = lf.getCurrentPosition():
+        int position = lf.getCurrentPosition();
         while (lf.getCurrentPosition() < position - (rotations * 560)) {
             lf.setPower(-1);
             lb.setPower(-1);
@@ -38,7 +32,7 @@ public class Autonomous1 extends OpMode {
         rb.setPower(0);
     }
     public void right (float rotations) {
-        int position = lf.getCurrentPosition():
+        int position = lf.getCurrentPosition();
         while (lf.getCurrentPosition() < position - (rotations * 560)) {
             lf.setPower(-1);
             lb.setPower(-1);
@@ -51,7 +45,7 @@ public class Autonomous1 extends OpMode {
         rb.setPower(0);
     }
     public void left (float rotations) {
-        int position = lf.getCurrentPosition():
+        int position = lf.getCurrentPosition();
         while (lf.getCurrentPosition() < position + (rotations * 560)) {
             lf.setPower(1);
             lb.setPower(1);
@@ -64,7 +58,7 @@ public class Autonomous1 extends OpMode {
         rb.setPower(0);
     }
     public void back (float rotations) {
-        int position = lf.getCurrentPosition():
+        int position = lf.getCurrentPosition();
         while (lf.getCurrentPosition() < position + (rotations * 560)) {
             lf.setPower(1);
             lb.setPower(1);
@@ -86,38 +80,39 @@ public class Autonomous1 extends OpMode {
     public void loop() {
         switch (step) {
             case (1):
-                right (inchConversion( inches 29));
+                right (inchConversion(  29));
+                openClaw();
                 step++;
                 break;
             case (2):
-                back (inchConversion( inches 60));
+                back (inchConversion( 60));
                 if (isYellow() == false){
-                    drive (x 0, y 0, h 0, k 0);
+                    drive (0, 0, 0, 0);
                     step++;
                     break;
                 }
             case (3):
-                back (inchConversion(inches 25));
+                back (inchConversion(25));
                 step++;
                 break;
             case (4):
-                right (inchConversion(inches 6));
+                right (inchConversion(6));
                 step++;
                 break;
             case (5):
-                forward (inchConversion(inches 2));
+                forward (inchConversion(2));
                 step++;
                 break;
             case (6):
-                claw close;
+                closeClaw();
                 step++;
                 break;
             case (7):
-                left (inchConversion(inches 12);
+                left (inchConversion(12));
                 step++;
                 break;
             case (8):
-                forward (inchConversion(inches 96));
+                forward (inchConversion(96));
                 step++;
                 break;
         }
@@ -130,4 +125,4 @@ public class Autonomous1 extends OpMode {
 
     }
 }
-*/
+
