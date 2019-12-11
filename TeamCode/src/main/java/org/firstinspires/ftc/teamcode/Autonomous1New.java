@@ -72,10 +72,7 @@ public class Autonomous1New extends Library {
     }
 
     public void init() {
-        lf = hardwareMap.dcMotor.get("lf");
-        lb = hardwareMap.dcMotor.get("lb");
-        rf = hardwareMap.dcMotor.get("rf");
-        rb = hardwareMap.dcMotor.get("rb");
+        hardwareInit();
     }
     public void loop() {
         switch (step) {
