@@ -19,6 +19,17 @@ public abstract class Library extends OpMode{
     public Servo claw, hook, normPark;
     public CRServo park;
     float [] omniValues = new float [4];
+    public void speedController(){
+        if (gamepad1.left_bumper){
+            speed = 0.6f;
+        }
+        if (gamepad1.right_bumper){
+            speed = 0.75f;
+        }
+        if (gamepad1.left_bumper && gamepad1.right_bumper){
+            speed = 0.65f;
+        }
+    }
     public void clawControl(boolean button){
         if (button && !clawOpen) {
             openClaw();
@@ -27,6 +38,7 @@ public abstract class Library extends OpMode{
             closeClaw();
             clawOpen = false;
         }
+        waitFor(100);
     }
     public void lift(boolean up, boolean down, double stall){
         if (gamepad1.x){
@@ -45,27 +57,19 @@ public abstract class Library extends OpMode{
     public void closeClaw(){
         claw.setPosition(0); //subject to change for ease of hardware
     }
-   /** public void parkStickDown(boolean button){
-        if (button){
-            park.setPower(1/2);
+    public void aClawController(boolean button){
+        if (button && !clawOpen) {
+            claw.setPosition(1);
+            clawOpen = true;
+        }else if (button){
+            claw.setPosition(0);
+            clawOpen = false;
         }
+        waitFor(100);
     }
-    public void parkStickUp(boolean button){
-        if (button){
-            park.setPower(-1/2);
-            try {
-                Thread.sleep(3500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            park.setPower(0);
-        }
-    }
-    public void parkStickStop(boolean button, boolean butone){
-        if (!button && !butone){
-            park.setPower(0);
-        }
-    }*/
+
+
+
     public float inchConversion(float inches){
         return inches/4;
     }
@@ -77,7 +81,7 @@ public abstract class Library extends OpMode{
         rb.setPower(k*speed);
     }
 
-    public void hardwareInit(){
+    public void hardwareInit()  {
         lf = hardwareMap.dcMotor.get("lf");
         lb = hardwareMap.dcMotor.get("lb");
         rf = hardwareMap.dcMotor.get("rf");

@@ -1,11 +1,15 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.CRServo;
 
 @TeleOp(name = "Main Code")
-public class Primary_TeleOp extends Library {
+public class ClawTestingTIme extends Library {
+    CRServo Claw;
+    double clawSpeed = 0.5;
     public void init(){
         hardwareInit();
+        Claw = hardwareMap.crservo.get("Claw");
     }
     public void loop(){
         /**Start of Omni Drive code*/
@@ -33,12 +37,23 @@ public class Primary_TeleOp extends Library {
         /**end of Omni Drive Code*/
 
 
-        aClawController(gamepad1.a);
-        //clawControl(gamepad1.a);
         lift(gamepad1.x, gamepad1.y, 0);
-        hookIn(gamepad1.dpad_right);
-        hookOut(gamepad1.dpad_left);
-        speedController();
+        if (gamepad1.dpad_up){
+            Claw.setPower(clawSpeed);
+        }
+        if (gamepad1.dpad_down){
+            Claw.setPower(-clawSpeed);
+        }
+        if (!gamepad1.dpad_down && !gamepad1.dpad_up){
+            Claw.setPower(0);
+        }
+        if (gamepad1.dpad_right){
+            clawSpeed = clawSpeed + 0.1;
+        }
+        if (gamepad1.dpad_left){
+            clawSpeed = clawSpeed - 0.1;
+        }
+
 
 
 
@@ -47,7 +62,6 @@ public class Primary_TeleOp extends Library {
         telemetry.addData("rf power: ", rf.getPower());
         telemetry.addData("rb power: ", rb.getPower());
         telemetry.addData("Speed",speed);
-        telemetry.addData("Claw Position", claw.getPosition());
 
         telemetry.update();
     }
