@@ -94,7 +94,7 @@ public abstract class Library extends OpMode{
 
         telemetry.addData("hook position", hook.getPosition());
         telemetry.addData("claw position", claw.getPosition());
-        hook.setPosition(0.1);
+        hook.setPosition(0.55);
         claw.setPosition(0);
     }
    /** public void speedUp(boolean button){
@@ -127,7 +127,7 @@ public abstract class Library extends OpMode{
 
     public void hookOut (boolean button){
         if (button){
-            hook.setPosition(0.6);
+
         }
     }
     public void hookIn(boolean button){
@@ -151,6 +151,178 @@ public abstract class Library extends OpMode{
         }
     }
 
+
+
+
+    public float decimalSeparateDec(float input){
+        float num = input;
+        for (float i = input; i > 1; i = i-1){
+            num = num-1;
+        }
+        return num;
+    }
+
+    public float decimalSeparateWhl(float input){
+        float num = 0;
+        for (float i = input; i > 1; i = i-1){
+            num = num+1;
+        }
+        return num;
+    }
+
+
+
+
+
+
+    public void forward(float rotationNumber){
+        int curPos = lf.getCurrentPosition();
+        float rotationsPartial = decimalSeparateDec(rotationNumber);
+        float rotationsFull = decimalSeparateWhl(rotationNumber);
+        int rotParInTics = Math.round(rotationsPartial*560);
+        int rotateTo = rotParInTics + curPos;
+        if (rotateTo > 560){
+            rotateTo = rotateTo - 560;
+        }
+
+        drive(0.6f, 0.6f, 0.6f, 0.6f);
+        while (rotationsFull != 0){
+            if (lf.getCurrentPosition() == curPos){
+                rotationsFull = rotationsFull-1;
+                waitFor(100);
+            }
+        }
+        drive (0,0,0,0);
+        while (lf.getCurrentPosition() != rotateTo) {
+            drive(0.6f,0.6f,0.6f,0.6f);
+        }
+        drive(0,0,0,0);
+    }
+    public void backwards(float rotationNumber){
+        int curPos = lf.getCurrentPosition();
+        float rotationsPartial = decimalSeparateDec(rotationNumber);
+        float rotationsFull = decimalSeparateWhl(rotationNumber);
+        int rotParInTics = Math.round(rotationsPartial*560);
+        int rotateTo = rotParInTics + curPos;
+        if (rotateTo > 560){
+            rotateTo = rotateTo - 560;
+        }
+
+        drive(-0.6f, -0.6f, -0.6f, -0.6f);
+        while (rotationsFull != 0){
+            if (lf.getCurrentPosition() == curPos){
+                rotationsFull = rotationsFull-1;
+                waitFor(100);
+            }
+        }
+        drive (0,0,0,0);
+        while (lf.getCurrentPosition() != rotateTo) {
+            drive(-0.6f, -0.6f, -0.6f, -0.6f);
+        }
+        drive(0,0,0,0);
+    }
+    public void left(float rotationNumber){
+        int curPos = lf.getCurrentPosition();
+        float rotationsPartial = decimalSeparateDec(rotationNumber);
+        float rotationsFull = decimalSeparateWhl(rotationNumber);
+        int rotParInTics = Math.round(rotationsPartial*560);
+        int rotateTo = rotParInTics + curPos;
+        if (rotateTo > 560){
+            rotateTo = rotateTo - 560;
+        }
+
+        drive(-0.6f, 0.6f, 0.6f, -0.6f);
+        while (rotationsFull != 0){
+            if (lf.getCurrentPosition() == curPos){
+                rotationsFull = rotationsFull-1;
+                waitFor(100);
+            }
+        }
+        drive (0,0,0,0);
+        while (lf.getCurrentPosition() != rotateTo) {
+            drive(-0.6f, 0.6f, 0.6f, -0.6f);
+        }
+        drive(0,0,0,0);
+    }
+    public void right(float rotationNumber){
+        int curPos = lf.getCurrentPosition();
+        float rotationsPartial = decimalSeparateDec(rotationNumber);
+        float rotationsFull = decimalSeparateWhl(rotationNumber);
+        int rotParInTics = Math.round(rotationsPartial*560);
+        int rotateTo = rotParInTics + curPos;
+        if (rotateTo > 560){
+            rotateTo = rotateTo - 560;
+        }
+
+        drive(0.6f, -0.6f, -0.6f, 0.6f);
+        while (rotationsFull != 0){
+            if (lf.getCurrentPosition() == curPos){
+                rotationsFull = rotationsFull-1;
+                waitFor(100);
+            }
+        }
+        drive (0,0,0,0);
+        while (lf.getCurrentPosition() != rotateTo) {
+            drive(0.6f, -0.6f, -0.6f, 0.6f);
+        }
+        drive(0,0,0,0);
+    }
+
+
+
+    /*
+    public void forward (float rotations) {
+        int position = lf.getCurrentPosition();
+        while (lf.getCurrentPosition() < position - (rotations * 560)) {
+            lf.setPower(-1);
+            lb.setPower(-1);
+            rf.setPower(1);
+            rb.setPower(1);
+        }
+        lf.setPower(0);
+        lb.setPower(0);
+        rf.setPower(0);
+        rb.setPower(0);
+    }
+    public void right (float rotations) {
+        int position = lf.getCurrentPosition();
+        while (lf.getCurrentPosition() < position - (rotations * 560)) {
+            lf.setPower(-1);
+            lb.setPower(-1);
+            rf.setPower(-1);
+            rb.setPower(-1);
+        }
+        lf.setPower(0);
+        lb.setPower(0);
+        rf.setPower(0);
+        rb.setPower(0);
+    }
+    public void left (float rotations) {
+        int position = lf.getCurrentPosition();
+        while (lf.getCurrentPosition() < position + (rotations * 560)) {
+            lf.setPower(1);
+            lb.setPower(1);
+            rf.setPower(1);
+            rb.setPower(1);
+        }
+        lf.setPower(0);
+        lb.setPower(0);
+        rf.setPower(0);
+        rb.setPower(0);
+    }
+    public void back (float rotations) {
+        int position = lf.getCurrentPosition();
+        while (lf.getCurrentPosition() < position + (rotations * 560)) {
+            lf.setPower(1);
+            lb.setPower(1);
+            rf.setPower(-1);
+            rb.setPower(-1);
+        }
+        lf.setPower(0);
+        lb.setPower(0);
+        rf.setPower(0);
+        rb.setPower(0);
+    }*/
 }
 
 

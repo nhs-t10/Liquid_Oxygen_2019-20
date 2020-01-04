@@ -2,80 +2,20 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
-@Autonomous
+@Autonomous (name = "Forward about a foot")
 public class Autonomous1New extends Library {
     float [] omniValues = new float [4];
     int step = 1;
     public boolean isYellow(){
         return false;
     }
-    public float inchConversion(float inches){
-        return inches/4;
-    }
-    public void drive(float x, float y, float h, float k){
-        lf.setPower(-x);
-        lb.setPower(-y);
-        rf.setPower(h);
-        rb.setPower(k);
-    }
-    public void forward (float rotations) {
-        int position = lf.getCurrentPosition();
-        while (lf.getCurrentPosition() < position - (rotations * 560)) {
-            lf.setPower(-1);
-            lb.setPower(-1);
-            rf.setPower(1);
-            rb.setPower(1);
-        }
-        lf.setPower(0);
-        lb.setPower(0);
-        rf.setPower(0);
-        rb.setPower(0);
-    }
-    public void right (float rotations) {
-        int position = lf.getCurrentPosition();
-        while (lf.getCurrentPosition() < position - (rotations * 560)) {
-            lf.setPower(-1);
-            lb.setPower(-1);
-            rf.setPower(-1);
-            rb.setPower(-1);
-        }
-        lf.setPower(0);
-        lb.setPower(0);
-        rf.setPower(0);
-        rb.setPower(0);
-    }
-    public void left (float rotations) {
-        int position = lf.getCurrentPosition();
-        while (lf.getCurrentPosition() < position + (rotations * 560)) {
-            lf.setPower(1);
-            lb.setPower(1);
-            rf.setPower(1);
-            rb.setPower(1);
-        }
-        lf.setPower(0);
-        lb.setPower(0);
-        rf.setPower(0);
-        rb.setPower(0);
-    }
-    public void back (float rotations) {
-        int position = lf.getCurrentPosition();
-        while (lf.getCurrentPosition() < position + (rotations * 560)) {
-            lf.setPower(1);
-            lb.setPower(1);
-            rf.setPower(-1);
-            rb.setPower(-1);
-        }
-        lf.setPower(0);
-        lb.setPower(0);
-        rf.setPower(0);
-        rb.setPower(0);
-    }
-
     public void init() {
         hardwareInit();
     }
     public void loop() {
-        switch (step) {
+        forward(inchConversion(12));
+        waitFor(30000);
+       /** switch (step) {
             case (1):
                 right (inchConversion(  29));
                 openClaw();
@@ -118,7 +58,7 @@ public class Autonomous1New extends Library {
         telemetry.addData("Yellow? ", isYellow());
 
         telemetry.update();
-
+*/
 
     }
 }
