@@ -46,9 +46,11 @@ public class Primary_TeleOp extends Library {
         telemetry.addData("lb power: ", lb.getPower());
         telemetry.addData("rf power: ", rf.getPower());
         telemetry.addData("rb power: ", rb.getPower());
+        telemetry.addData("rX", rX);
+        telemetry.addData("lX", lX);
+        telemetry.addData("lY", lY);
         telemetry.addData("Speed",speed);
         telemetry.addData("Claw Position", claw.getPosition());
-
         telemetry.update();
     }
 

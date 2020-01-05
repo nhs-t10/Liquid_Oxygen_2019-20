@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
 
-@TeleOp(name = "Main Code")
+@TeleOp(name = "Arnon Claw")
 public class ClawTestingTIme extends Library {
     CRServo Claw;
     double clawSpeed = 0.5;

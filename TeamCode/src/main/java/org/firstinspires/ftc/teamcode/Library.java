@@ -21,7 +21,7 @@ public abstract class Library extends OpMode{
     float [] omniValues = new float [4];
     public void speedController(){
         if (gamepad1.left_bumper){
-            speed = 0.6f;
+            speed = 0.53f;
         }
         if (gamepad1.right_bumper){
             speed = 0.75f;
@@ -29,16 +29,6 @@ public abstract class Library extends OpMode{
         if (gamepad1.left_bumper && gamepad1.right_bumper){
             speed = 0.65f;
         }
-    }
-    public void clawControl(boolean button){
-        if (button && !clawOpen) {
-            openClaw();
-            clawOpen = true;
-        }else if (button){
-            closeClaw();
-            clawOpen = false;
-        }
-        waitFor(100);
     }
     public void lift(boolean up, boolean down, double stall){
         if (gamepad1.x){
@@ -127,12 +117,12 @@ public abstract class Library extends OpMode{
 
     public void hookOut (boolean button){
         if (button){
-
+            hook.setPosition(0.7);
         }
     }
     public void hookIn(boolean button){
         if (button){
-            hook.setPosition(0.1);
+            hook.setPosition(0.2);
         }
     }
     public void parking(boolean park, boolean unpark){
@@ -161,7 +151,6 @@ public abstract class Library extends OpMode{
         }
         return num;
     }
-
     public float decimalSeparateWhl(float input){
         float num = 0;
         for (float i = input; i > 1; i = i-1){
@@ -192,7 +181,6 @@ public abstract class Library extends OpMode{
                 waitFor(100);
             }
         }
-        drive (0,0,0,0);
         while (lf.getCurrentPosition() != rotateTo) {
             drive(0.6f,0.6f,0.6f,0.6f);
         }
@@ -215,7 +203,6 @@ public abstract class Library extends OpMode{
                 waitFor(100);
             }
         }
-        drive (0,0,0,0);
         while (lf.getCurrentPosition() != rotateTo) {
             drive(-0.6f, -0.6f, -0.6f, -0.6f);
         }
@@ -238,7 +225,6 @@ public abstract class Library extends OpMode{
                 waitFor(100);
             }
         }
-        drive (0,0,0,0);
         while (lf.getCurrentPosition() != rotateTo) {
             drive(-0.6f, 0.6f, 0.6f, -0.6f);
         }
@@ -261,68 +247,9 @@ public abstract class Library extends OpMode{
                 waitFor(100);
             }
         }
-        drive (0,0,0,0);
         while (lf.getCurrentPosition() != rotateTo) {
             drive(0.6f, -0.6f, -0.6f, 0.6f);
         }
         drive(0,0,0,0);
     }
-
-
-
-    /*
-    public void forward (float rotations) {
-        int position = lf.getCurrentPosition();
-        while (lf.getCurrentPosition() < position - (rotations * 560)) {
-            lf.setPower(-1);
-            lb.setPower(-1);
-            rf.setPower(1);
-            rb.setPower(1);
-        }
-        lf.setPower(0);
-        lb.setPower(0);
-        rf.setPower(0);
-        rb.setPower(0);
-    }
-    public void right (float rotations) {
-        int position = lf.getCurrentPosition();
-        while (lf.getCurrentPosition() < position - (rotations * 560)) {
-            lf.setPower(-1);
-            lb.setPower(-1);
-            rf.setPower(-1);
-            rb.setPower(-1);
-        }
-        lf.setPower(0);
-        lb.setPower(0);
-        rf.setPower(0);
-        rb.setPower(0);
-    }
-    public void left (float rotations) {
-        int position = lf.getCurrentPosition();
-        while (lf.getCurrentPosition() < position + (rotations * 560)) {
-            lf.setPower(1);
-            lb.setPower(1);
-            rf.setPower(1);
-            rb.setPower(1);
-        }
-        lf.setPower(0);
-        lb.setPower(0);
-        rf.setPower(0);
-        rb.setPower(0);
-    }
-    public void back (float rotations) {
-        int position = lf.getCurrentPosition();
-        while (lf.getCurrentPosition() < position + (rotations * 560)) {
-            lf.setPower(1);
-            lb.setPower(1);
-            rf.setPower(-1);
-            rb.setPower(-1);
-        }
-        lf.setPower(0);
-        lb.setPower(0);
-        rf.setPower(0);
-        rb.setPower(0);
-    }*/
 }
-
-
