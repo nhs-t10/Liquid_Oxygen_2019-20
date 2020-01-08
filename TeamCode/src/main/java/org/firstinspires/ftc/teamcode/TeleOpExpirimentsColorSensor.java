@@ -11,6 +11,8 @@ public class TeleOpExpirimentsColorSensor extends Library {
         Glasses = hardwareMap.colorSensor.get("Glasses");
     }
     public void loop(){
+        telemetry.addData("ARGB",Glasses.argb());
+        telemetry.addData("alpha",Glasses.alpha());
         telemetry.addData("red",Glasses.red());
         telemetry.addData("green",Glasses.green());
         telemetry.addData("blue",Glasses.blue());
