@@ -25,16 +25,17 @@ public class AutonomousENCODER_TEST extends Library {
                 timer = new ElapsedTime();
                 step++;
                 break;
-            case(2):
-                drive(0.7f,0.7f,0.7f,0.7f);
-                if (timer.milliseconds() > 500){
-                   drive(0,0,0,0);
-                   step++;
-                   break;
-                }
-            case(3):
-                telemetry.addLine("Autonomous Complete");
-                telemetry.update();
+            case (2):
+                lf.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                lb.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                rf.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                rb.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                lf.setTargetPosition(1000);
+                lb.setTargetPosition(1000);
+                rf.setTargetPosition(1000);
+                rb.setTargetPosition(1000);
+                step++;
+                break;
         }
        /** switch (step) {
             case (1):
