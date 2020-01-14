@@ -4,9 +4,8 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import static java.lang.Thread.sleep;
-@Autonomous (name = "Forward about a foot")
-public class Autonomous1New extends Library {
+@Autonomous (name = "ENCODER_TEST")
+public class AutonomousENCODER_TEST extends Library {
     float [] omniValues = new float [4];
     int step = 1;
     ElapsedTime timer;
@@ -15,7 +14,10 @@ public class Autonomous1New extends Library {
     }
     public void init() {
         hardwareInit();
-
+        lb.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        lf.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rf.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rb.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
     public void loop() {
         switch (step){
