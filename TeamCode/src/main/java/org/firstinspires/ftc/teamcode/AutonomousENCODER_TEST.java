@@ -26,7 +26,7 @@ public class AutonomousENCODER_TEST extends Library {
         rf.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         rb.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         drive(power, power, power, power);
-        while (lf.getCurrentPosition() < distance && rb.getCurrentPosition() < distance){
+        while (lf.getCurrentPosition() < distance /**&& rb.getCurrentPosition() < distance*/){
             telemetry.addData("lf Busy?", lf.isBusy());
             telemetry.addData("rb Busy?", rb.isBusy());
             telemetry.addData("Porgress", lf.getCurrentPosition());
