@@ -12,7 +12,39 @@ public class AutonomousENCODER_TEST extends Library {
     public boolean isYellow(){
         return false;
     }
-    public void driveToPos(float power, int distance){
+    public void modeBreak(){
+        lf.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rf.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        lb.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rb.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+    }
+    public void encodeRotate(float power, int distance){
+        lf.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        lb.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rf.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rb.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        lf.setTargetPosition(distance);
+        lb.setTargetPosition(distance);
+        rf.setTargetPosition(distance);
+        rb.setTargetPosition(distance);
+        lb.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        lf.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rf.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rb.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        drive(power, power, power, power);
+        while (lf.getCurrentPosition() < distance /**&& rb.getCurrentPosition() < distance*/){
+            telemetry.addData("lf Busy?", lf.isBusy());
+            telemetry.addData("rb Busy?", rb.isBusy());
+            telemetry.addData("Porgress", lf.getCurrentPosition());
+            telemetry.addData("Progress", rb.getCurrentPosition());
+            telemetry.update();
+            //Wait patiently
+        }
+        modeBreak();
+        drive(0,0,0,0);
+
+    }
+    public void encodeLinear(float power, int distance){
         lf.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         lb.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rf.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -34,6 +66,7 @@ public class AutonomousENCODER_TEST extends Library {
             telemetry.update();
             //Wait patiently
         }
+        modeBreak();
         drive(0,0,0,0);
 
     }
@@ -47,7 +80,7 @@ public class AutonomousENCODER_TEST extends Library {
                 step++;
                 break;
             case (2):
-                driveToPos(0.6f, 1000);
+                encodeLinear(0.6f, 1000);
 
                 step++;
                 break;
