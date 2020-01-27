@@ -63,9 +63,6 @@ public abstract class Library extends OpMode{
     public float inchConversion(float inches){
         return inches/4;
     }
-    public float rotToTick(float rotations){
-        return rotations/570;
-    }
 
     public void drive(float x, float y, float h, float k){
         lf.setPower(-x*speed);
