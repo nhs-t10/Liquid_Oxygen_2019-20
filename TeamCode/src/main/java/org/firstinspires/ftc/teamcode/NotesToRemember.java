@@ -14,5 +14,12 @@ public class NotesToRemember {
      }
 
 
+
+
+
+
+
+     ALWAYS SET POWER TO 0 FOR ENCODERS
+
     */
 }

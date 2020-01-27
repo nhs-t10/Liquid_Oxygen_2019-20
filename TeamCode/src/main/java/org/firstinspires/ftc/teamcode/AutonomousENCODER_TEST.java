@@ -111,8 +111,8 @@ public class AutonomousENCODER_TEST extends Library {
                 step++;
                 break;
             case (2):
-                //encodeLinear(0.3f, 1000 );
-                encodeRotate(0.2f, 350);
+                //encodeLinear(0, 1000 );
+                encodeRotate(0, 280);
                 step++;
                 break;
         }
