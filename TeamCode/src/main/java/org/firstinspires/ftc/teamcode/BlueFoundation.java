@@ -18,12 +18,7 @@ public class BlueFoundation extends Library {
                 step++;
                 break;
             case (2):
-                drive(-0.7f, -0.7f, -0.7f, -0.7f);
-                if (timer.milliseconds() > 2500){
-                    drive(0,0,0,0);
-                    step++;
-                    break;
-                }
+
             case (3):
                 hook.setPosition(0.6);
                 if (timer.milliseconds() > 3000){

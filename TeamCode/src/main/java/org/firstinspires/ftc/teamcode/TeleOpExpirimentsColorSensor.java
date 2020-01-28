@@ -15,7 +15,7 @@ public class TeleOpExpirimentsColorSensor extends Library {
 
     public void init(){
         hardwareInit();
-        color1 = hardwareMap.get(ColorSensor.class, "color1");
+
     }
     public void loop(){
         isBlack();
@@ -24,6 +24,7 @@ public class TeleOpExpirimentsColorSensor extends Library {
         telemetry.addData("red",color1.red());
         telemetry.addData("green",color1.green());
         telemetry.addData("blue",color1.blue());
+        telemetry.addData("Black?", isBlack());
         telemetry.update();
     }
 

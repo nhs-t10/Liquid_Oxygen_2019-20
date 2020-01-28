@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
 import com.qualcomm.robotcore.hardware.DcMotor.RunMode;
@@ -12,6 +13,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.CRServo;
 import static java.lang.Thread.sleep;
 public abstract class Library extends OpMode{
+    ColorSensor color1;
     boolean clawOpen;
     float speed = 0.5f;
     float lY , lX, rX, saveSpeed;
@@ -58,13 +60,18 @@ public abstract class Library extends OpMode{
         waitFor(100);
     }
 
-
+    public boolean isBlack(){
+        if (color1.alpha() < 1000){
+            return true;
+        }
+        return false;
+    }
 
     public float inchConversion(float inches){
         return inches/4;
     }
     public float rotToTick(float rotations){
-        return rotations/570;
+        return rotations*570;
     }
 
     public void drive(float x, float y, float h, float k){
@@ -82,6 +89,7 @@ public abstract class Library extends OpMode{
         hook = hardwareMap.servo.get("Hook");
         claw = hardwareMap.servo.get("Claw");
         ladder = hardwareMap.dcMotor.get("Ladder");
+        color1 = hardwareMap.get(ColorSensor.class, "color1");
         //park = hardwareMap.crservo.get("Park");
         //normPark = hardwareMap.servo.get("ParkII");
 
@@ -254,5 +262,38 @@ public abstract class Library extends OpMode{
             drive(0.6f, -0.6f, -0.6f, 0.6f);
         }
         drive(0,0,0,0);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public void iratClawTogg(){
+
+    }
+    public void iratArmUp(){
+
+    }
+    public void iratArmDown(){
+
     }
 }

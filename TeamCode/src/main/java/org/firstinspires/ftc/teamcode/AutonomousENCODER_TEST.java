@@ -101,6 +101,7 @@ public class AutonomousENCODER_TEST extends Library {
         drive(0, 0, 0, 0);
 
     }
+
     public void init() {
         hardwareInit();
     }
