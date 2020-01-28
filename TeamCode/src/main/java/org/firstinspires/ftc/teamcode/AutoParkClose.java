@@ -16,13 +16,6 @@ public class AutoParkClose extends Library {
             //Be patient
         }
     }
-
-    public void modeBreak(){
-        lf.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        rf.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        lb.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        rb.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-    }
     public void encodeStrafe(float power, int distance){
         lf.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         lb.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -122,51 +115,6 @@ public class AutoParkClose extends Library {
                 telemetry.addData("Time: ", timer.milliseconds());
                 telemetry.update();
         }
-       /** switch (step) {
-            case (1):
-                right (inchConversion(  29));
-                openClaw();
-                step++;
-                break;
-            case (2):
-                back (inchConversion( 60));
-                if (isYellow() == false){
-                    drive (0, 0, 0, 0);
-                    step++;
-                    break;
-                }
-            case (3):
-                back (inchConversion(25));
-                step++;
-                break;
-            case (4):
-                right (inchConversion(6));
-                step++;
-                break;
-            case (5):
-                forward (inchConversion(2));
-                step++;
-                break;
-            case (6):
-                closeClaw();
-                step++;
-                break;
-            case (7):
-                left (inchConversion(12));
-                step++;
-                break;
-            case (8):
-                forward (inchConversion(96));
-                step++;
-                break;
-        }
-
-        telemetry.addData("Step ", step);
-        telemetry.addData("Yellow? ", isYellow());
-
-        telemetry.update();
-*/
-
     }
     @Override
     public void stop(){
