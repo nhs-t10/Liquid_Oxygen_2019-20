@@ -20,12 +20,6 @@ public class RedFoundation extends Library {
     int timesWaitCalled = 0;
     double timeWaitFirstWasCalled;
     int step = 1;
-    public void modeBreak(){
-        lf.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        rf.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        lb.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        rb.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-    }
     public void encodeStrafe(float power, int distance){
         lf.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         lb.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -116,18 +110,18 @@ public class RedFoundation extends Library {
                 break;
             case (2):
                 //to stones
-                encodeStrafe(0, 4168);
+                iratClawTogg();
+                encodeStrafe(0, -4168);
                 step++;
                 break;
             case (3):
+                timer = new ElapsedTime();
                 while(!isBlack()){
                     drive(-0.5f, -0.5f, -0.5f, -0.5f);
-                    timer = new ElapsedTime();
                 }
                 step++;
                 break;
             case (4):
-                iratClawTogg();
                 encodeStrafe(0, -200);
                 iratClawTogg();
                 delay(1000);
@@ -155,7 +149,13 @@ public class RedFoundation extends Library {
             case(7):
                 encodeLinear(0, 4489);
                 hookIn(true);
-            case(8):
+                step++;
+                break;
+            case (8):
+                encodeStrafe(0, 1275);
+                encodeLinear(0, -570);
+                encodeStrafe(0, 3000);
+            case(9):
                 telemetry.addLine("Autonomous Complete");
                 telemetry.addData("time", timer.milliseconds());
                 telemetry.update();

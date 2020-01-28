@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 public class Primary_TeleOp extends Library {
     public void init(){
         hardwareInit();
+        modeBreak();
     }
     public void loop(){
         /**Start of Omni Drive code*/

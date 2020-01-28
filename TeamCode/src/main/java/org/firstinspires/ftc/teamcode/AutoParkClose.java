@@ -4,22 +4,25 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import static java.lang.Thread.sleep;
+@Autonomous (name = "ENCODER_TEST")
+public class AutoParkClose extends Library {
+    float [] omniValues = new float [4];
+    int step = 1;
+    ElapsedTime timer;
 
-@Autonomous (name = "Blue Foundation [WIP]")
-public class BlueFoundation extends Library {
-    float[] omniValues = new float[4];
     public void delay(double delay){
         double endTime = timer.milliseconds()+delay;
         while(timer.milliseconds() <= endTime){
             //Be patient
         }
     }
-    //waiting vars
-    ElapsedTime timer;
-    int timesWaitCalled = 0;
-    double timeWaitFirstWasCalled;
-    int step = 1;
+
+    public void modeBreak(){
+        lf.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rf.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        lb.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rb.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+    }
     public void encodeStrafe(float power, int distance){
         lf.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         lb.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -98,74 +101,76 @@ public class BlueFoundation extends Library {
         drive(0, 0, 0, 0);
 
     }
-    @Override
+
     public void init() {
         hardwareInit();
     }
     public void loop() {
-        switch (step) {
-            case(1):
-                //timer = new ElapsedTime();
+        switch (step){
+            case (1):
+                timer = new ElapsedTime();
                 step++;
                 break;
             case (2):
-                //to stones
-                encodeStrafe(0, -4168);
-                iratClawTogg();
+                encodeLinear(0, 50);
+                delay(20);
+                encodeStrafe(0, 570);
                 step++;
                 break;
-            case (3):
-                timer = new ElapsedTime();
-                while(!isBlack()){
-                    drive(0.5f, 0.5f, 0.5f, 0.5f);
-                }
-                step++;
-                break;
-            case (4):
-                encodeStrafe(0, -200);
-                iratClawTogg();
-                delay(1000);
-                encodeStrafe(0, 913);
-                step++;
-                break;
-            case (5):
-                drive(-0.5f, -0.5f, -0.5f, -0.5f);
-                delay (timer.milliseconds());
-                iratArmUp();
-                encodeLinear(0, -4275);
+            case(3):
+                telemetry.addLine("Autonomous Complete");
+                telemetry.addData("Time: ", timer.milliseconds());
+                telemetry.update();
+        }
+       /** switch (step) {
+            case (1):
+                right (inchConversion(  29));
                 openClaw();
                 step++;
                 break;
-            case (6):
-                encodeStrafe(0, 100);
-                delay(50);
-                encodeRotate(0, 300);
-                delay(50);
-                encodeLinear(0, 100);
-                hookOut(true);
-                delay(50);
+            case (2):
+                back (inchConversion( 60));
+                if (isYellow() == false){
+                    drive (0, 0, 0, 0);
+                    step++;
+                    break;
+                }
+            case (3):
+                back (inchConversion(25));
                 step++;
                 break;
-            case(7):
-                /**
-                 *
-                 * This step we might have to swap to power setting with time
-                 * Worried about the skystone flying off if the encoders move too fast
-                 *
-                 * */
-                encodeLinear(0, 4489);
-                hookIn(true);
+            case (4):
+                right (inchConversion(6));
+                step++;
+                break;
+            case (5):
+                forward (inchConversion(2));
+                step++;
+                break;
+            case (6):
+                closeClaw();
+                step++;
+                break;
+            case (7):
+                left (inchConversion(12));
                 step++;
                 break;
             case (8):
-                encodeStrafe(0, -1275);
-                encodeLinear(0, -570);
-                encodeStrafe(0, -3000);
-            case(9):
-                telemetry.addLine("Autonomous Complete");
-                telemetry.addData("time", timer.milliseconds());
-                telemetry.update();
+                forward (inchConversion(96));
+                step++;
+                break;
         }
+
+        telemetry.addData("Step ", step);
+        telemetry.addData("Yellow? ", isYellow());
+
+        telemetry.update();
+*/
+
+    }
+    @Override
+    public void stop(){
+        super.stop();
     }
 }
 
