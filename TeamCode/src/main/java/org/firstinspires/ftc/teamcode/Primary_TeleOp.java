@@ -40,7 +40,12 @@ public class Primary_TeleOp extends Library {
         hookIn(gamepad1.dpad_right);
         hookOut(gamepad1.dpad_left);
         speedController();
-
+        if (gamepad1.dpad_up){
+            iratArmUp();
+        }
+        if (gamepad1.dpad_down){
+            iratArmDown();
+        }
 
 
         telemetry.addData("lf power: ", lf.getPower());
@@ -51,7 +56,6 @@ public class Primary_TeleOp extends Library {
         telemetry.addData("lX", lX);
         telemetry.addData("lY", lY);
         telemetry.addData("Speed",speed);
-        telemetry.addData("Claw Position", claw.getPosition());
         telemetry.update();
     }
 

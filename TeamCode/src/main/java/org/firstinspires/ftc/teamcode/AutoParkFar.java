@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous (name = "ENCODER_TEST")
+@Autonomous (name = "Park Far")
 public class AutoParkFar extends Library {
     float [] omniValues = new float [4];
     int step = 1;
@@ -28,7 +28,7 @@ public class AutoParkFar extends Library {
         lf.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         rf.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         rb.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        drive(power, power, power, power);
+        drive(power, -power, -power, power);
         while (Math.abs(lf.getCurrentPosition()) < Math.abs(distance) /**&& rb.getCurrentPosition() < distance*/){
             telemetry.addData("lf Busy?", lf.isBusy());
             telemetry.addData("rb Busy?", rb.isBusy());
@@ -104,9 +104,9 @@ public class AutoParkFar extends Library {
                 step++;
                 break;
             case (2):
-                encodeLinear(0, 2565);
-                delay(50);
-                encodeStrafe(0, 570);
+                encodeLinear(0.1f, 500);
+                delay(500);
+                encodeStrafe(0.1f, 200);
                 step++;
                 break;
             case(3):

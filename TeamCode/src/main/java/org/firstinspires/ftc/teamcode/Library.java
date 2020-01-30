@@ -4,6 +4,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 import com.qualcomm.robotcore.hardware.DcMotor.RunMode;
 import com.qualcomm.robotcore.hardware.DcMotorController;
@@ -18,7 +19,7 @@ public abstract class Library extends OpMode{
     float speed = 0.5f;
     float lY , lX, rX, saveSpeed;
     public DcMotor lf, lb, rf, rb, ladder;
-    public Servo claw, hook, normPark;
+    public Servo claw, hook, normPark, iratClaw, iratArm;
     public CRServo park;
     float [] omniValues = new float [4];
     public void speedController(){
@@ -90,36 +91,12 @@ public abstract class Library extends OpMode{
         claw = hardwareMap.servo.get("Claw");
         ladder = hardwareMap.dcMotor.get("Ladder");
         color1 = hardwareMap.get(ColorSensor.class, "color1");
-        //park = hardwareMap.crservo.get("Park");
-        //normPark = hardwareMap.servo.get("ParkII");
+        iratArm = hardwareMap.servo.get("iratArm");
 
-        telemetry.addData("hook position", hook.getPosition());
-        telemetry.addData("claw position", claw.getPosition());
         hook.setPosition(0.55);
         claw.setPosition(0);
+        telemetry.addData("iratArm position", iratArm.getPosition());
     }
-   /** public void speedUp(boolean button){
-        if (button){
-            speed = speed + 0.1f;
-            speed = Range.clip(speed, 0, -1);
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-    public void speedDown(boolean button){
-        if (button){
-            speed = speed-0.1f;
-            speed = Range.clip(speed, 0, -1);
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }*/
     public void updateShortcuts(){
         lY = -gamepad1.left_stick_y;
         lX = gamepad1.left_stick_x;
@@ -155,114 +132,13 @@ public abstract class Library extends OpMode{
 
 
 
-    public float decimalSeparateDec(float input){
-        float num = input;
-        for (float i = input; i > 1; i = i-1){
-            num = num-1;
-        }
-        return num;
-    }
-    public float decimalSeparateWhl(float input){
-        float num = 0;
-        for (float i = input; i > 1; i = i-1){
-            num = num+1;
-        }
-        return num;
-    }
 
 
 
 
 
 
-    public void forward(float rotationNumber){
-        int curPos = lf.getCurrentPosition();
-        float rotationsPartial = decimalSeparateDec(rotationNumber);
-        float rotationsFull = decimalSeparateWhl(rotationNumber);
-        int rotParInTics = Math.round(rotationsPartial*560);
-        int rotateTo = rotParInTics + curPos;
-        if (rotateTo > 560){
-            rotateTo = rotateTo - 560;
-        }
 
-        drive(0.6f, 0.6f, 0.6f, 0.6f);
-        while (rotationsFull != 0){
-            if (lf.getCurrentPosition() == curPos){
-                rotationsFull = rotationsFull-1;
-                waitFor(100);
-            }
-        }
-        while (lf.getCurrentPosition() != rotateTo) {
-            drive(0.6f,0.6f,0.6f,0.6f);
-        }
-        drive(0,0,0,0);
-    }
-    public void backwards(float rotationNumber){
-        int curPos = lf.getCurrentPosition();
-        float rotationsPartial = decimalSeparateDec(rotationNumber);
-        float rotationsFull = decimalSeparateWhl(rotationNumber);
-        int rotParInTics = Math.round(rotationsPartial*560);
-        int rotateTo = rotParInTics + curPos;
-        if (rotateTo > 560){
-            rotateTo = rotateTo - 560;
-        }
-
-        drive(-0.6f, -0.6f, -0.6f, -0.6f);
-        while (rotationsFull != 0){
-            if (lf.getCurrentPosition() == curPos){
-                rotationsFull = rotationsFull-1;
-                waitFor(100);
-            }
-        }
-        while (lf.getCurrentPosition() != rotateTo) {
-            drive(-0.6f, -0.6f, -0.6f, -0.6f);
-        }
-        drive(0,0,0,0);
-    }
-    public void left(float rotationNumber){
-        int curPos = lf.getCurrentPosition();
-        float rotationsPartial = decimalSeparateDec(rotationNumber);
-        float rotationsFull = decimalSeparateWhl(rotationNumber);
-        int rotParInTics = Math.round(rotationsPartial*560);
-        int rotateTo = rotParInTics + curPos;
-        if (rotateTo > 560){
-            rotateTo = rotateTo - 560;
-        }
-
-        drive(-0.6f, 0.6f, 0.6f, -0.6f);
-        while (rotationsFull != 0){
-            if (lf.getCurrentPosition() == curPos){
-                rotationsFull = rotationsFull-1;
-                waitFor(100);
-            }
-        }
-        while (lf.getCurrentPosition() != rotateTo) {
-            drive(-0.6f, 0.6f, 0.6f, -0.6f);
-        }
-        drive(0,0,0,0);
-    }
-    public void right(float rotationNumber){
-        int curPos = lf.getCurrentPosition();
-        float rotationsPartial = decimalSeparateDec(rotationNumber);
-        float rotationsFull = decimalSeparateWhl(rotationNumber);
-        int rotParInTics = Math.round(rotationsPartial*560);
-        int rotateTo = rotParInTics + curPos;
-        if (rotateTo > 560){
-            rotateTo = rotateTo - 560;
-        }
-
-        drive(0.6f, -0.6f, -0.6f, 0.6f);
-        while (rotationsFull != 0){
-            if (lf.getCurrentPosition() == curPos){
-                rotationsFull = rotationsFull-1;
-                waitFor(100);
-            }
-        }
-        while (lf.getCurrentPosition() != rotateTo) {
-            drive(0.6f, -0.6f, -0.6f, 0.6f);
-        }
-        drive(0,0,0,0);
-    }
 
 
 
@@ -283,23 +159,31 @@ public abstract class Library extends OpMode{
         rb.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
-
-
-
-
-
-
-
-
-
-
-    public void iratClawTogg(){
-
+    public void brake(){
+        drive(0,0,0,0);
     }
-    public void iratArmUp(){
+    public void clockwise(){
+        drive(0.5f, 0.5f, -0.5f, -0.5f);
+        delay(765);
+        drive(0,0,0,0);
+    }
+    ElapsedTime timer;
+    public void delay(double delay){
+        double endTime = timer.milliseconds()+delay;
+        while(timer.milliseconds() <= endTime){
+            //Be patient
+        }
+    }
 
+
+
+
+
+
+    public void iratArmUp(){
+        iratArm.setPosition(iratArm.getPosition()+0.1);
     }
     public void iratArmDown(){
-
+        iratArm.setPosition(iratArm.getPosition()-0.1);
     }
 }

@@ -49,31 +49,10 @@ public class AutonomousENCODER_TEST extends Library {
         drive(0,0,0,0);
 
     }
-    public void encodeRotate(float power, int distance){
-        lf.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        lb.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rf.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rb.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        lf.setTargetPosition(distance);
-        lb.setTargetPosition(distance);
-        rf.setTargetPosition(distance);
-        rb.setTargetPosition(distance);
-        lb.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        lf.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rf.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rb.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        drive(-power, -power, power, power);
-        while (Math.abs(lf.getCurrentPosition()) < Math.abs(distance) /**&& rb.getCurrentPosition() < distance*/){
-            telemetry.addData("lf Busy?", lf.isBusy());
-            telemetry.addData("rb Busy?", rb.isBusy());
-            telemetry.addData("Porgress", lf.getCurrentPosition());
-            telemetry.addData("Progress", rb.getCurrentPosition());
-            telemetry.update();
-            //Wait patiently
-        }
-        modeBreak();
+    public void clockwise(){
+        drive(0.5f, 0.5f, -0.5f, -0.5f);
+        delay(765);
         drive(0,0,0,0);
-
     }
     public void encodeLinear(float power, int distance){
         lf.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -89,6 +68,15 @@ public class AutonomousENCODER_TEST extends Library {
         rf.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         rb.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         drive(power, power, power, power);
+        while (lf.getCurrentPosition() < distance/2 /**&& rb.getCurrentPosition() < distance*/){
+            telemetry.addData("lf Busy?", lf.isBusy());
+            telemetry.addData("rb Busy?", rb.isBusy());
+            telemetry.addData("Porgress", lf.getCurrentPosition());
+            telemetry.addData("Progress", rb.getCurrentPosition());
+            telemetry.update();
+            //Wait patiently
+        }
+        drive(power/2, power/2, power/2, power/2);
         while (lf.getCurrentPosition() < distance /**&& rb.getCurrentPosition() < distance*/){
             telemetry.addData("lf Busy?", lf.isBusy());
             telemetry.addData("rb Busy?", rb.isBusy());
@@ -98,6 +86,7 @@ public class AutonomousENCODER_TEST extends Library {
             //Wait patiently
         }
         modeBreak();
+
         drive(0, 0, 0, 0);
 
     }
@@ -112,56 +101,16 @@ public class AutonomousENCODER_TEST extends Library {
                 step++;
                 break;
             case (2):
-                //encodeLinear(0, 1000 );
-                encodeRotate(0, 280);
+                modeBreak();
+//                encodeLinear(0.05f, 1000 );
+//                delay(1500);
+//                encodeRotate(0.05f, 278);
+                drive(0.5f, -0.5f, -0.5f, 0.5f);
+                delay(1000);
+                brake();
                 step++;
                 break;
         }
-       /** switch (step) {
-            case (1):
-                right (inchConversion(  29));
-                openClaw();
-                step++;
-                break;
-            case (2):
-                back (inchConversion( 60));
-                if (isYellow() == false){
-                    drive (0, 0, 0, 0);
-                    step++;
-                    break;
-                }
-            case (3):
-                back (inchConversion(25));
-                step++;
-                break;
-            case (4):
-                right (inchConversion(6));
-                step++;
-                break;
-            case (5):
-                forward (inchConversion(2));
-                step++;
-                break;
-            case (6):
-                closeClaw();
-                step++;
-                break;
-            case (7):
-                left (inchConversion(12));
-                step++;
-                break;
-            case (8):
-                forward (inchConversion(96));
-                step++;
-                break;
-        }
-
-        telemetry.addData("Step ", step);
-        telemetry.addData("Yellow? ", isYellow());
-
-        telemetry.update();
-*/
-
     }
     @Override
     public void stop(){

@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous (name = "ENCODER_TEST")
+@Autonomous (name = "Park Close Right")
 public class AutoParkClose extends Library {
     float [] omniValues = new float [4];
     int step = 1;
@@ -105,9 +105,11 @@ public class AutoParkClose extends Library {
                 step++;
                 break;
             case (2):
-                encodeLinear(0, 50);
-                delay(20);
-                encodeStrafe(0, 570);
+                drive(0.5f, 0.5f, 0.5f, 0.5f);
+                delay(100);
+                drive(0.5f, -0.5f, -0.5f, 0.5f);
+                delay(1500);
+                drive(0,0,0,0);
                 step++;
                 break;
             case(3):

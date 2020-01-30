@@ -16,10 +16,11 @@ public class RedFoundation extends Library {
         }
     }
     //waiting vars
-    ElapsedTime timer;
+    ElapsedTime timer, tracker, tracker2;
     int timesWaitCalled = 0;
     double timeWaitFirstWasCalled;
     int step = 1;
+
     public void encodeStrafe(float power, int distance){
         lf.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         lb.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -105,56 +106,81 @@ public class RedFoundation extends Library {
     public void loop() {
         switch (step) {
             case(1):
-                //timer = new ElapsedTime();
+                timer = new ElapsedTime();
                 step++;
                 break;
             case (2):
                 //to stones
                 iratClawTogg();
-                encodeStrafe(0, -4168);
+                drive(-0.5f, 0.5f, 0.5f, -0.5f);
+                delay(1500);
+                drive(0,0,0,0);
+                delay(100);
                 step++;
                 break;
             case (3):
-                timer = new ElapsedTime();
-                while(!isBlack()){
-                    drive(-0.5f, -0.5f, -0.5f, -0.5f);
-                }
+                tracker = new ElapsedTime();
+                drive(-0.5f,-0.5f,-0.5f,-0.5f);
+                delay(1000);
+                brake();
+//                while(!isBlack()){
+//                    drive(-0.5f, -0.5f, -0.5f, -0.5f);
+//                }
                 step++;
                 break;
             case (4):
-                encodeStrafe(0, -200);
+                tracker2 = new ElapsedTime();
+                drive(-0.5f, 0.5f, 0.5f, -0.5f);
+                delay(750);
+                brake();
                 iratClawTogg();
-                delay(1000);
-                encodeStrafe(0, 913);
+                delay(500);
+                drive(0.5f, -0.5f, -0.5f, 0.5f);
                 step++;
                 break;
             case (5):
                 drive(0.5f, 0.5f, 0.5f, 0.5f);
-                delay (timer.milliseconds());
+                delay (tracker.milliseconds()-tracker2.milliseconds());
                 iratArmUp();
-                encodeLinear(0, 4275);
-                openClaw();
+                drive(0.6f, 0.6f, 0.6f, 0.6f);
+                delay(5000);
+                iratClawTogg();
                 step++;
                 break;
             case (6):
-                encodeStrafe(0, 100);
+                drive(0.5f, -0.5f, -0.5f, 0.5f);
+                delay(1000);
+                brake();
                 delay(50);
-                encodeRotate(0, -300);
-                delay(50);
-                encodeLinear(0, 100);
+                clockwise();
+                delay(500);
+                drive(-0.5f,-0.5f,-0.5f,-0.5f);
+                delay(1000);
+                brake();
                 hookOut(true);
-                delay(50);
+                delay(500);
                 step++;
                 break;
             case(7):
-                encodeLinear(0, 4489);
+                drive(0.5f,0.5f,0.5f,0.5f);
+                delay(1800);
                 hookIn(true);
-                step++;
+                step=9;
                 break;
             case (8):
-                encodeStrafe(0, 1275);
-                encodeLinear(0, -570);
-                encodeStrafe(0, 3000);
+                drive(0.5f, -0.5f, -0.5f, 0.5f);
+                delay(1300);
+                brake();
+                delay(500);
+                drive(-0.5f, -0.5f, -0.5f, -0.5f);
+                delay(850);
+                brake();
+                delay(500);
+                drive(0.5f, -0.5f, -0.5f, 0.5f);
+                delay(1800);
+                brake();
+                step++;
+                break;
             case(9):
                 telemetry.addLine("Autonomous Complete");
                 telemetry.addData("time", timer.milliseconds());
