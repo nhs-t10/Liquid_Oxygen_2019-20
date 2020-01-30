@@ -40,11 +40,11 @@ public class Primary_TeleOp extends Library {
         hookIn(gamepad1.dpad_right);
         hookOut(gamepad1.dpad_left);
         speedController();
-        if (gamepad1.dpad_up){
-            iratArmUp();
+        if (gamepad1.dpad_up) {
+            servo.setPosition(1);
         }
-        if (gamepad1.dpad_down){
-            iratArmDown();
+        if (gamepad1.dpad_down) {
+            servo.setposition(0);
         }
 
 
