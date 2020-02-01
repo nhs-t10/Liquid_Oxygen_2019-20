@@ -31,26 +31,33 @@ public class RedFoundation extends Library {
                 step++;
                 break;
             case(2):
+                drive(-0.5f,0.5f,0.5f,-0.5f);
+                delay(750);
+                brake();
+                delay(100);
+                step++;
+                break;
+            case(3):
                 //go to foundation
                 drive(-0.5f, -0.5f, -0.5f, -0.5f);
                 delay(1500);
                 brake();
                 hookOut(true);
                 delay(50);
-            case(3):
+            case(4):
                 //pull foundation forward
                 drive(0.5f,0.5f,0.5f,0.5f);
                 delay(2000);
                 brake();
                 step++;
                 break;
-            case(4):
+            case(5):
                 delay(200);
                 hookIn(true);
                 delay(50);
                 step++;
                 break;
-            case (5):
+            case (6):
                 //go to parkNear
 //                clockwise();
 //                delay(100);
@@ -59,7 +66,7 @@ public class RedFoundation extends Library {
                 brake();
                 step++;
                 break;
-            case(6):
+            case(7):
                 telemetry.addLine("Autonomous Complete");
                 telemetry.addData("time", timer.milliseconds());
                 telemetry.addData("Step #", step);

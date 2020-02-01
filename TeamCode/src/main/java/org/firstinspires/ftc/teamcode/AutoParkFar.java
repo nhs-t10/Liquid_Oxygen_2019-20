@@ -27,7 +27,7 @@ public class AutoParkFar extends Library {
                 break;
             case (2):
                 drive(0.5f,0.5f,0.5f,0.5f);
-                delay(1300);
+                delay(1000);
                 brake();
                 delay(100);
                 drive(0.5f, -0.5f, -0.5f, 0.5f);

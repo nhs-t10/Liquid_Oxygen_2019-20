@@ -46,6 +46,9 @@ public class Primary_TeleOp extends Library {
         if (gamepad1.dpad_down) {
             iratArm.setPosition(0);
         }
+        if (gamepad1.b){
+            speed = 0.4f;
+        }
 
 
         telemetry.addData("lf power: ", lf.getPower());

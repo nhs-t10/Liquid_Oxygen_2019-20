@@ -1,21 +1,19 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous (name = "Red Foundation Far")
-public class Autonomous1New extends Library {
-    float [] omniValues = new float [4];
-    int step = 1;
-    ElapsedTime timer;
+@Autonomous (name = "Blue Foundation Far")
+public class BlueFoundationFar extends Library {
     public void delay(double delay){
         double endTime = timer.milliseconds()+delay;
         while(timer.milliseconds() <= endTime){
             //Be patient
         }
     }
-
+    ElapsedTime timer;
+    int step = 1;
+    @Override
     public void init() {
         hardwareInit();
     }
@@ -25,16 +23,8 @@ public class Autonomous1New extends Library {
                 timer = new ElapsedTime();
                 step++;
                 break;
-//            case(99):
-//                if ( timer.milliseconds() >= 15000){
-//                    step = 2;
-//                    break;
-//                }
-//                else{
-//                    step = 99;
-//                }
             case(2):
-                drive(-0.5f,0.5f,0.5f,-0.5f);
+                drive(0.5f,-0.5f,-0.5f,0.5f);
                 delay(750);
                 brake();
                 delay(100);
@@ -64,7 +54,7 @@ public class Autonomous1New extends Library {
                 //go to parkNear
 //                clockwise();
 //                delay(100);
-                drive(0.5f,-0.5f,-0.5f,0.5f);
+                drive(-0.5f,0.5f,0.5f,-0.5f);
                 delay(3000);
                 brake();
                 step++;
@@ -74,7 +64,7 @@ public class Autonomous1New extends Library {
                 delay(1000);
                 brake();
                 delay(200);
-                drive(0.5f, -0.5f, -0.5f, 0.5f);
+                drive(-0.5f, 0.5f, 0.5f, -0.5f);
                 delay(650);
                 brake();
                 step++;
@@ -86,9 +76,5 @@ public class Autonomous1New extends Library {
                 telemetry.update();
         }
     }
-    @Override
-    public void stop(){
-        super.stop();
-    }
 }
-
+    

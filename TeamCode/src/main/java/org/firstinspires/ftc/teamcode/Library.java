@@ -94,7 +94,6 @@ public abstract class Library extends OpMode{
         iratArm = hardwareMap.servo.get("iratArm");
 
         hook.setPosition(0.55);
-        claw.setPosition(0);
         telemetry.addData("iratArm position", iratArm.getPosition());
     }
     public void updateShortcuts(){
