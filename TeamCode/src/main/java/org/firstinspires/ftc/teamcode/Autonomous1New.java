@@ -43,14 +43,14 @@ public class Autonomous1New extends Library {
             case(3):
                 //go to foundation
                 drive(-0.5f, -0.5f, -0.5f, -0.5f);
-                delay(1500);
+                delay(2500);
                 brake();
                 hookOut(true);
                 delay(50);
             case(4):
                 //pull foundation forward
                 drive(0.5f,0.5f,0.5f,0.5f);
-                delay(2000);
+                delay(3000);
                 brake();
                 step++;
                 break;

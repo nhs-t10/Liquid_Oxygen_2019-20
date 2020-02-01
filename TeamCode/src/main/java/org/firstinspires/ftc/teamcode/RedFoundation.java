@@ -40,7 +40,7 @@ public class RedFoundation extends Library {
             case(3):
                 //go to foundation
                 drive(-0.5f, -0.5f, -0.5f, -0.5f);
-                delay(1500);
+                delay(2500);
                 brake();
                 hookOut(true);
                 delay(50);

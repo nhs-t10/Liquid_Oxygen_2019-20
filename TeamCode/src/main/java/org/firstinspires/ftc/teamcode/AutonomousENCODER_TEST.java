@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous (name = "Blue Foundation Far")
+@Autonomous (name = "ENCODER_TEST")
 public class AutonomousENCODER_TEST extends Library {
     float [] omniValues = new float [4];
     int step = 1;
