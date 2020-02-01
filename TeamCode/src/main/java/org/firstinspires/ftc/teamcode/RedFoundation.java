@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import static java.lang.Thread.sleep;
 
-@Autonomous (name = "Red Foundation parkNear")
+@Autonomous (name = "Red Foundation Near")
 public class RedFoundation extends Library {
     float[] omniValues = new float[4];
     public void delay(double delay){
@@ -42,20 +42,24 @@ public class RedFoundation extends Library {
                 drive(0.5f,0.5f,0.5f,0.5f);
                 delay(2000);
                 brake();
+                step++;
+                break;
+            case(4):
+                delay(200);
                 hookIn(true);
                 delay(50);
                 step++;
                 break;
-            case (4):
+            case (5):
                 //go to parkNear
-                clockwise();
-                delay(100);
-                drive(0.5f,0.5f,0.5f,0.5f);
-                delay(1800);
+//                clockwise();
+//                delay(100);
+                drive(0.5f,-0.5f,-0.5f,0.5f);
+                delay(3600);
                 brake();
                 step++;
                 break;
-            case(5):
+            case(6):
                 telemetry.addLine("Autonomous Complete");
                 telemetry.addData("time", timer.milliseconds());
                 telemetry.addData("Step #", step);
