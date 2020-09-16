@@ -57,7 +57,7 @@ public class RedFoundation extends Library {
                 delay(50);
                 step++;
                 break;
-            case (6):
+            case(6):
                 //go to parkNear
 //                clockwise();
 //                delay(100);

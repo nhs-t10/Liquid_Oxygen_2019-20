@@ -3,7 +3,8 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
+//I'M NOT A CHARCTER BECUASE SAKURAI THINKS 
+//THAT AN ASSIST TROPHY CAN CONTAIN MY POWER
 @Autonomous (name = "Red Foundation Far")
 public class Autonomous1New extends Library {
     float [] omniValues = new float [4];
